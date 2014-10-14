@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
 
 import java.util.Vector;
@@ -23,14 +22,13 @@ public class dessin_view extends View {
     private dessin mon_dessin;
     private boolean sortie_jeu = false;
     private String player="no_name";
+    private long chrono;
 
 
 
 
     dessin_view(Context c, int w, int h, String player_name){
         super(c);
-        /*this.posX = 0;
-        this.posY = 0;*/
         this.width = w;
         this.height = h;
         ballRect=new Rect();
@@ -39,6 +37,7 @@ public class dessin_view extends View {
         if (player_name.length()>0) {
             this.player = player_name;
         }
+
     }
 
 
@@ -71,9 +70,12 @@ public class dessin_view extends View {
         this.posAX = width-100;
         this.posAY = height-350;
 
+
     }
 
     protected void onDraw(Canvas c){
+
+       // this.chrono = dessin.get_chrono();
 
         //les déplacements
         posX -= Math.round(offsetX)*2;//droite-gauche
@@ -106,11 +108,13 @@ public class dessin_view extends View {
         c.drawCircle(posDX+posX, posDY+posY, rayon_boule, paint);
 
 
-        //tracer le text
+        //affiche les vies
         paint.setTextSize(60);
         paint.setARGB(150,255,255,255);
-        c.drawText("Reste " + (5-nb_perdu) + "vies!" ,100 , 100, paint);
-        c.drawText(player,width/2,100,paint);
+        c.drawText("Reste " + (5-nb_perdu) + " vies!" ,100 , 100, paint);
+
+        //affiche le chrono
+        c.drawText(get_chrono_string(),width/2,100,paint);
 
 
 
@@ -167,6 +171,23 @@ public class dessin_view extends View {
     public void set_offsets(float x, float y){
         offsetX = x;
         offsetY = y;
+    }
+
+
+    public void set_chrono(long t){
+        chrono = t;
+    }
+
+    public String get_chrono_string(){
+
+        int jours = Math.round((chrono/1000) / (60 * 60 * 24));
+        int heures = Math.round(((chrono/1000) - (jours * 60 * 60 * 24)) / (60 * 60));
+        int minutes = Math.round(((chrono/1000) - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+        int secondes = Math.round((chrono/1000) - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+
+        String the_chrono = ( String.valueOf(heures) + "h " + String.valueOf(minutes) + "m " + String.valueOf(secondes)+"s" );
+
+        return the_chrono;
     }
 
 

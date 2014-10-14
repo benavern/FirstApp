@@ -1,6 +1,7 @@
 package com.example.zezen.myapplication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,8 +10,10 @@ import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.Toast;
 
 
@@ -27,7 +30,10 @@ public class dessin extends Activity implements SensorEventListener {
     private boolean loaded = false, plays=false;
     AudioManager audioManager;
 
+    Context context;
+    int duration = Toast.LENGTH_SHORT;
 
+    Chronometer mChronometer;
 
     dessin_view v;
 
@@ -35,6 +41,13 @@ public class dessin extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_dessin);
+
+        context = getApplicationContext();
+
+        mChronometer = new Chronometer(this);
+        mChronometer.start();
+
+
 
         // récupération de la taille de l'écran
         DisplayMetrics metrics = new DisplayMetrics();
@@ -105,6 +118,8 @@ public class dessin extends Activity implements SensorEventListener {
                 "Orientation Z (Yaw) :"+ Float.toString(event.values[0]));
                 */
         v.set_offsets(Math.round(event.values[0]), Math.round(event.values[1]));
+        v.set_chrono(SystemClock.elapsedRealtime() - mChronometer.getBase());
+
         v.invalidate();
         //overflowY = event.values[1];
 
@@ -117,13 +132,18 @@ public class dessin extends Activity implements SensorEventListener {
 
 
     public void victoire(){
+        Toast toast = Toast.makeText(context, "Vous avez gagné, bravo !!!", duration);
+        toast.show();
         Intent intent = new Intent(dessin.this, Victoire.class);
         intent.putExtra("player_name",player_name);
+        intent.putExtra("chrono",v.get_chrono_string());
         startActivity(intent);
         this.finish();
     }
 
     public void perdu(){
+        Toast toast = Toast.makeText(context, "Vous avez perdu!!!", duration);
+        toast.show();
         Intent intent = new Intent(dessin.this, FirstActivity.class);
         startActivity(intent);
         this.finish();

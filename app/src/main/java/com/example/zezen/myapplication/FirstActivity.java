@@ -104,7 +104,7 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
 
 
 
-
+/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -124,4 +124,5 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
         }
         return super.onOptionsItemSelected(item);
     }
+*/
 }
