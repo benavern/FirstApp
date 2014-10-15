@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Vector;
@@ -23,11 +24,12 @@ public class dessin_view extends View {
     private boolean sortie_jeu = false;
     private String player="no_name";
     private long chrono;
+    private int dificulte;/// = 3;
 
 
 
 
-    dessin_view(Context c, int w, int h, String player_name){
+    dessin_view(Context c, int w, int h, String player_name, String difficulte){
         super(c);
         this.width = w;
         this.height = h;
@@ -37,6 +39,8 @@ public class dessin_view extends View {
         if (player_name.length()>0) {
             this.player = player_name;
         }
+        this.dificulte = Integer.parseInt(difficulte);
+//        Log.v("difficulté ",difficulte);
 
     }
 
@@ -78,8 +82,9 @@ public class dessin_view extends View {
        // this.chrono = dessin.get_chrono();
 
         //les déplacements
-        posX -= Math.round(offsetX)*2;//droite-gauche
-        posY += Math.round(offsetY)*2;//haut-bas
+        posX -= Math.round(offsetX)*dificulte;//droite-gauche
+        posY += Math.round(offsetY)*dificulte;//haut-bas
+        Log.v("difficulté", ""+dificulte);
 
         //fond
         c.drawARGB(255,128,128,128);
@@ -139,7 +144,7 @@ public class dessin_view extends View {
 
     protected void try_again(){
         if (5-nb_perdu>0){
-            this.mon_dessin.playSound(this);
+            this.mon_dessin.playSound(this, 1);
             nb_perdu += 1;
             posX = 0;
             posY = 0;
@@ -156,6 +161,7 @@ public class dessin_view extends View {
 
     protected void perdu(){
 //        Log.v("perdu", "nan nan!");
+        //this.mon_dessin.playSound(this, 2);
         this.mon_dessin.perdu();
     }
 
@@ -181,9 +187,9 @@ public class dessin_view extends View {
     public String get_chrono_string(){
 
         int jours = Math.round((chrono/1000) / (60 * 60 * 24));
-        int heures = Math.round(((chrono/1000) - (jours * 60 * 60 * 24)) / (60 * 60));
+        int heures = Math.round(((chrono / 1000) - (jours * 60 * 60 * 24)) / (60 * 60));
         int minutes = Math.round(((chrono/1000) - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
-        int secondes = Math.round((chrono/1000) - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+        int secondes = Math.round((chrono / 1000) - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
 
         String the_chrono = ( String.valueOf(heures) + "h " + String.valueOf(minutes) + "m " + String.valueOf(secondes)+"s" );
 

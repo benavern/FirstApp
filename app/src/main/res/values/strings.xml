@@ -18,5 +18,6 @@
     <string name="title_activity_dessin">dessin</string>
     <string name="change_activity">Jouer</string>
     <string name="title_activity_victoire">Victoire</string>
+    <string name="label_difficulté">Choix difficulté :</string>
 
 </resources>

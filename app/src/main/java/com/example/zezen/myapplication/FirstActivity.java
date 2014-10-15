@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 /*
@@ -24,6 +23,7 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
     Button ajouter, supprimer, afficher, bonus, suivant;
     TextView afficheur, resultat;
     EditText nom, prenom;
+    SeekBar difficulte;
 
 
     @Override
@@ -33,12 +33,12 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
         setContentView(R.layout.activity_first);
         //setContentView(R.layout.toto);
 
-        compteur = 3;
-
-        ajouter = (Button) findViewById(R.id.new_meuf);
-        supprimer = (Button) findViewById(R.id.new_ex);
-        //bonus = (Button) findViewById(R.id.bonus);
-        afficheur = (TextView) findViewById(R.id.text_afficheur);
+//        compteur = 3;
+//
+//        ajouter = (Button) findViewById(R.id.new_meuf);
+//        supprimer = (Button) findViewById(R.id.new_ex);
+//        //bonus = (Button) findViewById(R.id.bonus);
+//        afficheur = (TextView) findViewById(R.id.text_afficheur);
 
 
 
@@ -64,6 +64,8 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
         //resultat = (TextView) findViewById(R.id.text_result);
 
         suivant = (Button) findViewById(R.id.button2);
+
+        difficulte = (SeekBar) findViewById(R.id.difficulte);
         /*---------------------------------------------------------------------*/
 
         suivant.setOnClickListener(this);
@@ -73,23 +75,24 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
     public void onClick(View v){
         Intent intent = new Intent(FirstActivity.this, dessin.class);
         intent.putExtra("player_name",nom.getText().toString());
+        intent.putExtra("difficulte",(""+(difficulte.getProgress()+1)));
        // Log.v("je m'appelle", nom.getText().toString());
         startActivity(intent);
     }
 
-    /*
-    test avec onclicklistener sinon*/
-    public void addCopine(View v){
-        compteur++;
-        afficheur.setText("Vous avez " + compteur + " meufs");
-    }
-
-    public void dellCopine(View v){
-        if (compteur>0) {
-            compteur--;
-            afficheur.setText("Vous avez " + compteur + " meufs");
-        }
-    }
+//    /*
+//    test avec onclicklistener sinon*/
+//    public void addCopine(View v){
+//        compteur++;
+//        afficheur.setText("Vous avez " + compteur + " meufs");
+//    }
+//
+//    public void dellCopine(View v){
+//        if (compteur>0) {
+//            compteur--;
+//            afficheur.setText("Vous avez " + compteur + " meufs");
+//        }
+//    }
 
 
 

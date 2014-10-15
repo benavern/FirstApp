@@ -25,6 +25,7 @@ public class dessin extends Activity implements SensorEventListener {
     //the sensor manager
     private SensorManager sManager;
     private String player_name ="";
+    private String difficulte = "3";
     private SoundPool soundPool;
     private int soundID;
     private boolean loaded = false, plays=false;
@@ -58,8 +59,8 @@ public class dessin extends Activity implements SensorEventListener {
 
         //récupération du nom du player
         player_name = (String) getIntent().getSerializableExtra("player_name");
-
-        v = new dessin_view(this, metrics.widthPixels, metrics.heightPixels, player_name);
+        String difficulte = (String) getIntent().getSerializableExtra("difficulte");
+        v = new dessin_view(this, metrics.widthPixels, metrics.heightPixels, player_name, difficulte);
 
         //initioalisation des variables et création des colliders
         v.init(this);
@@ -75,16 +76,24 @@ public class dessin extends Activity implements SensorEventListener {
                 loaded = true;
             }
         });
+
+
         soundID = soundPool.load(this, R.raw.splash_sound, 1);
-
-
 
 
         setContentView(v);
     }
 
 
-    public void playSound(View v) {
+    public void playSound(View v, int id) {
+
+//        if (id == 1 ) {
+//            soundID = soundPool.load(this, R.raw.splash_sound, 1);
+//        }
+//        else if( id == 2 ){
+//            soundID = soundPool.load(this, R.raw.perdu, 1);
+//        }  pourquoi ça marche pas ??????????????????????
+
         if (loaded && !plays) {
             soundPool.play(soundID, 1, 1, 1, 0, 1f);
             //Toast.makeText(this, "Played sound", Toast.LENGTH_SHORT).show();
