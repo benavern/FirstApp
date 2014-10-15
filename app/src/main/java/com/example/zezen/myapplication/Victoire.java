@@ -1,19 +1,34 @@
 package com.example.zezen.myapplication;
 
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 
-public class Victoire extends ActionBarActivity {
+public class Victoire extends ActionBarActivity implements View.OnClickListener{
 
    TextView victoire,info;
    ImageView ma_tronche;
+   Button vers_scores;
+
+    String photoPath = "";
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -34,14 +49,30 @@ public class Victoire extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Log.v("image location",getRealPathFromURI(data.getData()));
+
+            info.setText(getRealPathFromURI(data.getData()));
+            //Toast.makeText(this, "image sauvée sur : " + data.getData(), Toast.LENGTH_LONG).show();
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Bitmap the_tronche = RotateBitmap(imageBitmap,-90);
             ma_tronche.setImageBitmap(the_tronche);
-//            ma_tronche.setRotation(-90);
+
+            photoPath = getRealPathFromURI(data.getData());
+
+
+
         }
     }
 
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(this, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
 
     @Override
@@ -62,6 +93,17 @@ public class Victoire extends ActionBarActivity {
         ma_tronche = (ImageView) findViewById(R.id.ma_tronche);
 
 
+        vers_scores = (Button) findViewById(R.id.viewScores);
+
+        vers_scores.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(Victoire.this, Scores.class);
+        //intent.putExtra("path_photo",photoPath);
+        startActivity(intent);
     }
 
 //
