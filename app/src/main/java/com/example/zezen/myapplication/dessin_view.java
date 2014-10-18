@@ -24,14 +24,14 @@ public class dessin_view extends View {
     private boolean sortie_jeu = false;
     private String player="no_name";
     private long chrono;
-    private int dificulte;/// = 3;
-    private int difficulte = 1;
+    private int sensibilite = 3;/// = 3;
+    private int difficulte = 3;
     private int gap_between = 70;
     private int gap_rightleft = 8;
 
 
 
-    dessin_view(Context c, int w, int h, String player_name, String difficulte){
+    dessin_view(Context c, int w, int h, String player_name, String sensibilite, String difficulte){
         super(c);
         this.width = w;
         this.height = h;
@@ -41,8 +41,8 @@ public class dessin_view extends View {
         if (player_name.length()>0) {
             this.player = player_name;
         }
-        this.dificulte = Integer.parseInt(difficulte);
-//        Log.v("difficulté ",difficulte);
+        this.difficulte = Integer.parseInt(difficulte);
+        this.sensibilite = Integer.parseInt(sensibilite);
 
     }
 
@@ -157,10 +157,12 @@ public class dessin_view extends View {
 
         // point de départ en haut à gauche
         this.posDX = 50;
-        this.posDY = 230;
+        this.posDY = 300;
         // arrivée en bas à droite
         this.posAX = width-50;
         this.posAY = height-295;
+
+
         switch (difficulte){
             case 1:
                 gap_between = 140;
@@ -197,9 +199,8 @@ public class dessin_view extends View {
        // this.chrono = dessin.get_chrono();
 
         //les déplacements
-        posX -= Math.round(offsetX)*dificulte;//droite-gauche
-        posY += Math.round(offsetY)*dificulte;//haut-bas
-        Log.v("difficulté", ""+dificulte);
+        posX -= Math.round(offsetX)*(sensibilite);//droite-gauche
+        posY += Math.round(offsetY)*(sensibilite);//haut-bas
 
         //fond
         c.drawARGB(255,128,128,128);

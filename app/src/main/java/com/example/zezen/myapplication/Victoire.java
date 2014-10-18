@@ -48,9 +48,9 @@ public class Victoire extends ActionBarActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Log.v("image location",getRealPathFromURI(data.getData()));
+            //Log.v("image location",getRealPathFromURI(data.getData()));
 
-            info.setText(getRealPathFromURI(data.getData()));
+            //info.setText(getRealPathFromURI(data.getData()));
             //Toast.makeText(this, "image sauvée sur : " + data.getData(), Toast.LENGTH_LONG).show();
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");

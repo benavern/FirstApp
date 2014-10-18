@@ -47,18 +47,33 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
 
         suivant.setOnClickListener(this);
         sensibilite.setOnSeekBarChangeListener(this);
+        difficulte.setOnSeekBarChangeListener(this);
 
     }
 
-    public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
-        switch(seekbar.getId()){
-            case R.id.sensibilite:
-                val_sensibilite.setText(progress);
-                break;
-            case R.id.difficulte:
-                val_difficulte.setText(progress);
-                break;
+    public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
+//        switch(seekbar.getId()){
+//            Log.v("", "" + seekbar);
+//
+//            case R.id.sensibilite:
+//                val_sensibilite.setText(""+(progress+1));
+//                break;
+//
+//            case R.id.difficulte:
+//                val_difficulte.setText(""+(progress+1));
+//                break;
+//
+//        }
 
+        if (bar.equals(sensibilite))
+        {
+            // do something
+            val_sensibilite.setText(""+(progress+1));
+        }
+        else if (bar.equals(difficulte))
+        {
+            // do something else
+            val_difficulte.setText(""+(progress+1));
         }
     }
 
@@ -77,34 +92,8 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
         intent.putExtra("player_name",nom.getText().toString());
         intent.putExtra("sensibilite",(""+(sensibilite.getProgress()+1)));
         intent.putExtra("difficulte",(""+(difficulte.getProgress()+1)));
-
-       // Log.v("je m'appelle", nom.getText().toString());
         startActivity(intent);
     }
-
-//    /*
-//    test avec onclicklistener sinon*/
-//    public void addCopine(View v){
-//        compteur++;
-//        afficheur.setText("Vous avez " + compteur + " meufs");
-//    }
-//
-//    public void dellCopine(View v){
-//        if (compteur>0) {
-//            compteur--;
-//            afficheur.setText("Vous avez " + compteur + " meufs");
-//        }
-//    }
-
-
-
-
-
-
-/*-----------------------------------------------------------------------------------*/
-    /*public void pop(View v){
-        resultat.setText("Coucou " + nom.getText() + " " + prenom.getText() + "!");
-    }*/
 
 
 

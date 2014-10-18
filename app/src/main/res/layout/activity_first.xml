@@ -60,7 +60,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/val_sensibilite" />
+                android:id="@+id/val_sensibilite"
+                android:textColor="#159"
+                android:textSize="25sp"
+                android:text="1"
+                android:layout_marginLeft="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,7 +95,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/val_difficulte" />
+                android:id="@+id/val_difficulte"
+                android:textColor="#159"
+                android:textSize="25sp"
+                android:text="1"
+                android:layout_marginLeft="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,6 +122,17 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="#595" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="by ZeZeN, Tefa et benom"
+            android:id="@+id/textView4"
+            android:layout_marginTop="20dp"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#bbb" />
 
     </LinearLayout>
 

@@ -23,7 +23,7 @@ public class dessin extends Activity implements SensorEventListener {
     //the sensor manager
     private SensorManager sManager;
     private String player_name ="";
-    private String difficulte = "3";
+    private String difficulte = "3", sensibilite="3";
     private SoundPool soundPool;
     private int soundID;
     private boolean loaded = false, plays=false;
@@ -57,8 +57,9 @@ public class dessin extends Activity implements SensorEventListener {
 
         //récupération du nom du player
         player_name = (String) getIntent().getSerializableExtra("player_name");
+        String sensibilite = (String) getIntent().getSerializableExtra("sensibilite");
         String difficulte = (String) getIntent().getSerializableExtra("difficulte");
-        v = new dessin_view(this, metrics.widthPixels, metrics.heightPixels, player_name, difficulte);
+        v = new dessin_view(this, metrics.widthPixels, metrics.heightPixels, player_name, sensibilite, difficulte);
 
         //initioalisation des variables et création des colliders
         v.init(this);
