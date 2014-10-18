@@ -20,5 +20,6 @@
     <string name="title_activity_victoire">Victoire</string>
     <string name="label_difficulté">Choix difficulté :</string>
     <string name="title_activity_scores">Scores</string>
+    <string name="sensibilite_label">Choix sensibilité :</string>
 
 </resources>

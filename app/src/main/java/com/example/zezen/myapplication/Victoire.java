@@ -22,11 +22,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 
-public class Victoire extends ActionBarActivity implements View.OnClickListener{
+public class Victoire extends ActionBarActivity{
 
    TextView victoire,info;
    ImageView ma_tronche;
-   Button vers_scores;
 
     String photoPath = "";
 
@@ -93,18 +92,8 @@ public class Victoire extends ActionBarActivity implements View.OnClickListener{
         ma_tronche = (ImageView) findViewById(R.id.ma_tronche);
 
 
-        vers_scores = (Button) findViewById(R.id.viewScores);
-
-        vers_scores.setOnClickListener(this);
-
     }
 
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(Victoire.this, Scores.class);
-        //intent.putExtra("path_photo",photoPath);
-        startActivity(intent);
-    }
 
 //
 //    @Override

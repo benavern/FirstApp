@@ -17,13 +17,12 @@ import android.widget.TextView;
 * morceaux inutiles.
 *
 * */
-public class FirstActivity extends ActionBarActivity implements View.OnClickListener {
+public class FirstActivity extends ActionBarActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
-    int compteur;
-    Button ajouter, supprimer, afficher, bonus, suivant;
-    TextView afficheur, resultat;
-    EditText nom, prenom;
-    SeekBar difficulte;
+    Button suivant;
+    TextView  val_sensibilite, val_difficulte;
+    EditText nom;
+    SeekBar sensibilite, difficulte;
 
 
     @Override
@@ -31,51 +30,54 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_first);
-        //setContentView(R.layout.toto);
-
-//        compteur = 3;
-//
-//        ajouter = (Button) findViewById(R.id.new_meuf);
-//        supprimer = (Button) findViewById(R.id.new_ex);
-//        //bonus = (Button) findViewById(R.id.bonus);
-//        afficheur = (TextView) findViewById(R.id.text_afficheur);
-
-
-
-       /* ajouter.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View arg0){
-                compteur++;
-                afficheur.setText("Vous avez " + compteur + " meufs");
-            }
-        });*/
-
-        /*bonus.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View arg0){
-                setContentView(R.layout.toto);
-
-            }
-        });*/
 
         /*--------------------------------------------------------------------*/
         nom = (EditText) findViewById(R.id.editText);
-        //prenom = (EditText) findViewById(R.id.editText2);
-
-        //afficher = (Button) findViewById(R.id.button);
-        //resultat = (TextView) findViewById(R.id.text_result);
 
         suivant = (Button) findViewById(R.id.button2);
 
+
+        sensibilite = (SeekBar) findViewById(R.id.sensibilite);
         difficulte = (SeekBar) findViewById(R.id.difficulte);
+
+        val_sensibilite = (TextView) findViewById(R.id.val_sensibilite);
+        val_difficulte = (TextView) findViewById(R.id.val_difficulte);
+
         /*---------------------------------------------------------------------*/
 
         suivant.setOnClickListener(this);
+        sensibilite.setOnSeekBarChangeListener(this);
+
+    }
+
+    public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
+        switch(seekbar.getId()){
+            case R.id.sensibilite:
+                val_sensibilite.setText(progress);
+                break;
+            case R.id.difficulte:
+                val_difficulte.setText(progress);
+                break;
+
+        }
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
 
     public void onClick(View v){
         Intent intent = new Intent(FirstActivity.this, dessin.class);
         intent.putExtra("player_name",nom.getText().toString());
+        intent.putExtra("sensibilite",(""+(sensibilite.getProgress()+1)));
         intent.putExtra("difficulte",(""+(difficulte.getProgress()+1)));
+
        // Log.v("je m'appelle", nom.getText().toString());
         startActivity(intent);
     }

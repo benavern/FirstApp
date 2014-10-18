@@ -51,11 +51,6 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Scores"
-            android:id="@+id/viewScores" />
     </LinearLayout>
 
 </RelativeLayout>

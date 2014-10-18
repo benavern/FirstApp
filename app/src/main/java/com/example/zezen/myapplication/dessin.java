@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 public class dessin extends Activity implements SensorEventListener {
 
-    //private float overflowX =0;
-    //private float overflowY =0;
 
     //the sensor manager
     private SensorManager sManager;
