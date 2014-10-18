@@ -15,7 +15,7 @@ import java.util.Vector;
  */
 public class dessin_view extends View {
 
-    private int posX=0, posY=0, width, height, rayon_boule = 20, nb_perdu = 0;
+    private int posX=0, posY=0, width, height, draw_height, draw_width, rayon_boule = 20, nb_perdu = 0;
     public float offsetX, offsetY;
     public Rect ballRect, arrivee;
     public Vector<Rect> obstacles;
@@ -25,7 +25,9 @@ public class dessin_view extends View {
     private String player="no_name";
     private long chrono;
     private int dificulte;/// = 3;
-
+    private int difficulte = 1;
+    private int gap_between = 70;
+    private int gap_rightleft = 8;
 
 
 
@@ -47,32 +49,145 @@ public class dessin_view extends View {
 
     Paint paint = new Paint();
 
-    public void init(dessin mon_dessin){
-        this.mon_dessin = mon_dessin;
+    public int random(int mini, int max){
+        return (int)( Math.random()*( max - mini + 1 ) ) + mini;
+    }
 
+    // rate: le quotient de proportionnalite pour positionner la bar d'entête
+    public void draw_frame(int rate){
         //haut
-        obstacles.addElement(new Rect(0,0,width,150));
+        obstacles.addElement(new Rect(0,0,width,height/rate));
         //bas
         obstacles.addElement(new Rect (0, height-250, width, height));
+        this.draw_height = height-height/rate-250;
+    }
+
+    // y: hauteur, space: espace libre pour la balle (rapport a la largeur)
+    public void bar_right(int y, int space){
+        obstacles.addElement(new Rect (0, y, width-width/space,y+20));
+    }
+
+    // y: hauteur, space: espace libre pour la balle (rapport a la largeur)
+    public void bar_left(int y, int space){
+        //obstacles.addElement(new Rect (0, y, width-width/space,y+20));
+        obstacles.addElement(new Rect (width/space, y, width,y+20));
+    }
+
+    // y: hauteur, space: espace libre pour la balle (rapport a la largeur)
+    public void bar_betweenspace(int y, int rate ,int space){
+        //obstacles.addElement(new Rect (0, y, width-width/space,y+20));
+        obstacles.addElement(new Rect (0, y, width-width/rate,y+20));
+        obstacles.addElement(new Rect (width-width/rate+space, y, width,y+20));
+    }
+
+    public void draw_labyrinth(int root){
+        // case line stop on the right\
+        boolean flag_1 = false;
+        boolean flag_2 = false;
+        for(int x = 1; x < root; x = x+1) {
+            if(x==1){
+                bar_right((height / 7) + x * (this.draw_height / root), gap_rightleft);
+                flag_1 = true;
+                flag_2 = false;
+            } else if(x==root-1){
+                bar_left((height / 7) + x * (this.draw_height / root), gap_rightleft);
+                flag_1 = false;
+                flag_2 = true;
+            }else{
+                switch (random(1, 3)) {
+                    case 1:
+                        if (!flag_1) {
+                            bar_right((height / 7) + x * (this.draw_height / root), gap_rightleft);
+                            flag_1 = true;
+                            flag_2 = false;
+                        } else {
+                            bar_left((height / 7) + x * (this.draw_height / root), gap_rightleft);
+                            flag_1 = false;
+                            flag_2 = true;
+                        }
+                        break;
+                    case 2:
+                        if (!flag_2) {
+                            bar_left((height / 7) + x * (this.draw_height / root),gap_rightleft);
+                            flag_2 = true;
+                            flag_1 = false;
+                        } else {
+                            bar_right((height / 7) + x * (this.draw_height / root), gap_rightleft);
+                            flag_2 = false;
+                            flag_1 = true;
+                        }
+                        break;
+                    case 3:
+                        bar_betweenspace((height / 7) + x * (this.draw_height / root), random(1, 4), gap_between);
+                        flag_2 = false;
+                        flag_1 = false;
+                        break;
+                }
+            }
+        }
+
+//        bar_left(2*this.draw_height /root,8);
+//
+//        // case line stopped in between
+//        bar_betweenspace(3*this.draw_height /root,3,70);
+//
+//        bar_betweenspace(4*this.draw_height /root,3,70);
+//        bar_betweenspace(5*this.draw_height /root,3,70);
+//        bar_betweenspace(6*this.draw_height /root,3,70);
+//        bar_betweenspace(7*this.draw_height /root,3,70);
+
+    }
+
+    public void init(dessin mon_dessin){
+        this.mon_dessin = mon_dessin;
+        draw_frame(7);
+
 
         //les autres
-        obstacles.addElement(new Rect (0, 350, width-width/6, 400));
-        obstacles.addElement(new Rect (width/6, 600, width, 650));
-
-        obstacles.addElement(new Rect (0, height/2, width/2-50, height/2+50));
-        obstacles.addElement(new Rect (width/2+50, height/2, width, height/2+50));
-
-
-        obstacles.addElement(new Rect (0, height-700, width-width/6, height-650));
-        obstacles.addElement(new Rect (width/8, height-450, width, height-400));
+//        obstacles.addElement(new Rect (0, height*(20/100), width,height*(30/100)));
+//        obstacles.addElement(new Rect (width/6, height*(25/100), width, height*(27/100)));
+//
+//        obstacles.addElement(new Rect (0, height/2, width/2-50, height/2+50));
+//        obstacles.addElement(new Rect (width/2+50, height/2, width, height/2+50));
+//
+//
+//        obstacles.addElement(new Rect (0, height-700, width-width/6, height-650));
+//        obstacles.addElement(new Rect (width/8, height-450, width, height-400));
 
 
         // point de départ en haut à gauche
-        this.posDX = 100;
-        this.posDY = 250;
+        this.posDX = 50;
+        this.posDY = 230;
         // arrivée en bas à droite
-        this.posAX = width-100;
-        this.posAY = height-350;
+        this.posAX = width-50;
+        this.posAY = height-295;
+        switch (difficulte){
+            case 1:
+                gap_between = 140;
+                gap_rightleft = 6;
+                draw_labyrinth(5);
+                break;
+            case 2:
+                gap_between = 110;
+                gap_rightleft = 7;
+                draw_labyrinth(6);
+                break;
+            case 3:
+                gap_between = 90;
+                gap_rightleft = 8;
+                draw_labyrinth(7);
+                break;
+            case 4:
+                gap_between = 70;
+                gap_rightleft = 8;
+                draw_labyrinth(8);
+                break;
+            case 5:
+                gap_between = 60;
+                gap_rightleft = 9;
+                draw_labyrinth(9);
+                break;
+        }
 
 
     }
@@ -116,10 +231,10 @@ public class dessin_view extends View {
         //affiche les vies
         paint.setTextSize(60);
         paint.setARGB(150,255,255,255);
-        c.drawText("Reste " + (5-nb_perdu) + " vies!" ,100 , 100, paint);
+        c.drawText("Reste " + (5-nb_perdu) + " vies!" ,width/2-150 , height-150, paint);
 
         //affiche le chrono
-        c.drawText(get_chrono_string(),width/2,100,paint);
+        c.drawText(get_chrono_string(),width/2-200,100,paint);
 
 
 
