@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zezen.myapplication" >
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".Splash"
             android:label="@string/app_name" >
@@ -34,6 +38,10 @@
         <activity
             android:name=".Victoire"
             android:label="@string/title_activity_victoire" >
+        </activity>
+        <activity
+            android:name=".Scores"
+            android:label="@string/title_activity_scores" >
         </activity>
     </application>
 

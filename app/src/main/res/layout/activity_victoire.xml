@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bravo"
-                android:textSize="50sp"/>
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -32,7 +32,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:id="@+id/ma_tronche"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" />
@@ -41,15 +41,21 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/score"
                 android:layout_gravity="center_horizontal"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
         </LinearLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Scores"
+            android:id="@+id/viewScores" />
     </LinearLayout>
 
 </RelativeLayout>
