@@ -22,7 +22,7 @@ public class dessin_view extends View {
     public int posDX=0, posDY=0, posAX=0, posAY=0;
     private dessin mon_dessin;
     private boolean sortie_jeu = false;
-    private String player="no_name";
+    private String player="ZeZen";
     private long chrono;
     private int sensibilite = 3;/// = 3;
     private int difficulte = 3;
@@ -142,22 +142,9 @@ public class dessin_view extends View {
         this.mon_dessin = mon_dessin;
         draw_frame(7);
 
-
-        //les autres
-//        obstacles.addElement(new Rect (0, height*(20/100), width,height*(30/100)));
-//        obstacles.addElement(new Rect (width/6, height*(25/100), width, height*(27/100)));
-//
-//        obstacles.addElement(new Rect (0, height/2, width/2-50, height/2+50));
-//        obstacles.addElement(new Rect (width/2+50, height/2, width, height/2+50));
-//
-//
-//        obstacles.addElement(new Rect (0, height-700, width-width/6, height-650));
-//        obstacles.addElement(new Rect (width/8, height-450, width, height-400));
-
-
         // point de départ en haut à gauche
         this.posDX = 50;
-        this.posDY = 300;
+        this.posDY = height/7+40;
         // arrivée en bas à droite
         this.posAX = width-50;
         this.posAY = height-295;
@@ -232,12 +219,13 @@ public class dessin_view extends View {
         //affiche les vies
         paint.setTextSize(60);
         paint.setARGB(150,255,255,255);
-        c.drawText("Reste " + (5-nb_perdu) + " vies!" ,width/2-150 , height-150, paint);
+        c.drawText("| Reste " + (5-nb_perdu) + " vies!" ,3*width/6 , height/14, paint);
 
         //affiche le chrono
-        c.drawText(get_chrono_string(),width/2-200,100,paint);
+        c.drawText(get_chrono_string(),1*width/7,height/14,paint);
 
-
+        //affiche le nom du joueur
+        c.drawText(this.player,3*width/7,(height/8+height/7)/2,paint);
 
         //intersection avec les bords de l'ecran
         if ( posX+posDX-rayon_boule <= 0 || posX+posDX+rayon_boule >= width || posY+posDY-rayon_boule <= 0 || posY+posDY+rayon_boule >= height){
