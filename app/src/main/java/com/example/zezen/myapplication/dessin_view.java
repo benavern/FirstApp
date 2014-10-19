@@ -219,7 +219,7 @@ public class dessin_view extends View {
         //affiche les vies
         paint.setTextSize(60);
         paint.setARGB(150,255,255,255);
-        c.drawText("| Reste " + (5-nb_perdu) + " vies!" ,3*width/6 , height/14, paint);
+        c.drawText(" Reste " + (5-nb_perdu) + " vies!" ,3*width/6 , height/14, paint);
 
         //affiche le chrono
         c.drawText(get_chrono_string(),1*width/7,height/14,paint);
@@ -257,6 +257,7 @@ public class dessin_view extends View {
         else{
             if (sortie_jeu == false) {
                 sortie_jeu = true;
+                this.mon_dessin.playSound(this, 2);
                 perdu();
             }
         }
@@ -272,6 +273,7 @@ public class dessin_view extends View {
     protected void victoire(){
         if (sortie_jeu == false) {
             sortie_jeu = true;
+            this.mon_dessin.playSound(this, 3);
             this.mon_dessin.victoire();
             //mon_dessin.finish();
 //            Log.v("victoire", "ouais ouais!");
