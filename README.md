@@ -2,7 +2,6 @@ FirstApp
 ========
 *parcequ'on a pas d'imagination...*
 
-
 Jeu créé dans le cadre du module CAI à l'enib.
 
 Il contient:
@@ -18,23 +17,26 @@ Comment ça marche?
 ================
 
 C'est un jeu de labyrinthe dont les murs sont générés aléatoirement.
+
 Pour jouer, il vous suffit d'entrer un nom, une difficulté (génère le labyrinthe en fonction) et une sensibilité (change la vitesse de la balle)
+
 Tapez JOUER, le jeu apparait. Maintenant inclinez votre téléphone pour faire avancer la balle du rond vert au rond rouge sans toucher les murs. Attention vous n'avez que 5 vies.
+
 Si vous gagnez faites un sourir et voyez le temps que vous avez réussi à faire.
 
 
 Installation
 ============
 
-Pour essayer l'application, téléchargez cet APK sur votre appareil [CECI](https://github.com/benavern/FirstApp/blob/master/app/build/outputs/apk/app-debug.apk)
+Pour essayer l'application, téléchargez cet APK sur votre appareil [CECI](https://github.com/benavern/FirstApp/blob/master/app/build/outputs/apk/app-debug.apk?raw=true)
 
 **ASTUCE1 :** activez l'installation d'applications depuis des sources inconnues.
 
-**ASTUCE2 :** si vous téléchargez l'application depuis votre téléphone directement : 
-+ le site vous dira "This file is to big to show, Sorry", mais ne vous inquiétez pas.
-+ cliquez sur la version Desktop en bas à droite
-+ cliquez sur View Raw et le fichier se téléchargera.
-
+Screenshots
+==========
+![Accueil]()
+![Jeu]()
+![Victoire]()
 
 
 *by ZeZeN, Tefa, Benom*
