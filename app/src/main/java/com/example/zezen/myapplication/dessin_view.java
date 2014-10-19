@@ -219,7 +219,7 @@ public class dessin_view extends View {
         //affiche les vies
         paint.setTextSize(60);
         paint.setARGB(150,255,255,255);
-        c.drawText("| Reste " + (5-nb_perdu) + " vies!" ,3*width/6 , height/14, paint);
+        c.drawText(" Reste " + (5-nb_perdu) + " vies!" ,3*width/6 , height/14, paint);
 
         //affiche le chrono
         c.drawText(get_chrono_string(),1*width/7,height/14,paint);

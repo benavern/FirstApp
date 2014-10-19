@@ -73,6 +73,8 @@ public class dessin extends Activity implements SensorEventListener {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
                 loaded = true;
+                soundPool.play(soundID, 1, 1, 1, 0, 1f);
+
             }
         });
 
@@ -110,7 +112,7 @@ public class dessin extends Activity implements SensorEventListener {
         }
 
         if (loaded && !plays) {
-            soundPool.play(soundID, 1, 1, 1, 0, 1f);
+//            soundPool.play(soundID, 1, 1, 1, 0, 1f);
             //Toast.makeText(this, "Played sound", Toast.LENGTH_SHORT).show();
             //plays = true;
         }
