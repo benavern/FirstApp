@@ -29,10 +29,11 @@ Installation
 Pour essayer l'application, téléchargez cet APK sur votre appareil [CECI](https://github.com/benavern/FirstApp/blob/master/app/build/outputs/apk/app-debug.apk)
 
 **ASTUCE1 :** activez l'installation d'applications depuis des sources inconnues.
+
 **ASTUCE2 :** si vous téléchargez l'application depuis votre téléphone directement : 
-	+ le site vous dira "This file is to big to show, Sorry", mais ne vous inquiétez pas.
-	+ cliquez sur la version Desktop en bas à droite
-	+ cliquez sur View Raw et le fichier se téléchargera.
++ le site vous dira "This file is to big to show, Sorry", mais ne vous inquiétez pas.
++ cliquez sur la version Desktop en bas à droite
++ cliquez sur View Raw et le fichier se téléchargera.
 
 
 
