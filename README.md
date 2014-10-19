@@ -34,9 +34,9 @@ Pour essayer l'application, téléchargez cet APK sur votre appareil [CECI](http
 
 Screenshots
 ==========
-![Accueil]()
-![Jeu]()
-![Victoire]()
+![Accueil](https://raw.githubusercontent.com/benavern/FirstApp/master/screenshots/Screenshot_2014-10-19-15-21-27.png)
+![Jeu](https://raw.githubusercontent.com/benavern/FirstApp/master/screenshots/Screenshot_2014-10-19-15-21-49.png)
+![Victoire](https://raw.githubusercontent.com/benavern/FirstApp/master/screenshots/Screenshot_2014-10-19-15-23-10.png)
 
 
 *by ZeZeN, Tefa, Benom*
