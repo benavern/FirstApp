@@ -269,6 +269,7 @@ public class dessin_view extends View {
         else{
             if (sortie_jeu == false) {
                 sortie_jeu = true;
+                this.mon_dessin.playSound(this, 2);
                 perdu();
             }
         }
@@ -284,6 +285,7 @@ public class dessin_view extends View {
     protected void victoire(){
         if (sortie_jeu == false) {
             sortie_jeu = true;
+            this.mon_dessin.playSound(this, 3);
             this.mon_dessin.victoire();
             //mon_dessin.finish();
 //            Log.v("victoire", "ouais ouais!");
