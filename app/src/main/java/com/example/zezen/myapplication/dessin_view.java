@@ -22,7 +22,7 @@ public class dessin_view extends View {
     public int posDX=0, posDY=0, posAX=0, posAY=0;
     private dessin mon_dessin;
     private boolean sortie_jeu = false;
-    private String player="ZeZen";
+    private String player="no_name";
     private long chrono;
     private int sensibilite = 3;/// = 3;
     private int difficulte = 3;
