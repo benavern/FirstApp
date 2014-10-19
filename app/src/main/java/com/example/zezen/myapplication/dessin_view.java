@@ -76,8 +76,8 @@ public class dessin_view extends View {
     // y: hauteur, space: espace libre pour la balle (rapport a la largeur)
     public void bar_betweenspace(int y, int rate ,int space){
         //obstacles.addElement(new Rect (0, y, width-width/space,y+20));
-        obstacles.addElement(new Rect (0, y, width-width/rate,y+20));
-        obstacles.addElement(new Rect (width-width/rate+space, y, width,y+20));
+        obstacles.addElement(new Rect (0, y, width/rate,y+20));
+        obstacles.addElement(new Rect (width/rate+space, y, width,y+20));
     }
 
     public void draw_labyrinth(int root){
@@ -89,10 +89,10 @@ public class dessin_view extends View {
                 bar_right((height / 7) + x * (this.draw_height / root), gap_rightleft);
                 flag_1 = true;
                 flag_2 = false;
+            } else if(x==root-2){
+                bar_betweenspace((height / 7) + x * (this.draw_height / root), random(1, 4), gap_between);
             } else if(x==root-1){
                 bar_left((height / 7) + x * (this.draw_height / root), gap_rightleft);
-                flag_1 = false;
-                flag_2 = true;
             }else{
                 switch (random(1, 3)) {
                     case 1:
@@ -118,7 +118,7 @@ public class dessin_view extends View {
                         }
                         break;
                     case 3:
-                        bar_betweenspace((height / 7) + x * (this.draw_height / root), random(1, 4), gap_between);
+                        bar_betweenspace((height / 7) + x * (this.draw_height / root), random(2, 6), gap_between);
                         flag_2 = false;
                         flag_1 = false;
                         break;
