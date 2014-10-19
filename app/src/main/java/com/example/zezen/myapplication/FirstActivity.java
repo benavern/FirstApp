@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
 *
@@ -88,11 +89,15 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
     }
 
     public void onClick(View v){
-        Intent intent = new Intent(FirstActivity.this, dessin.class);
-        intent.putExtra("player_name",nom.getText().toString());
-        intent.putExtra("sensibilite",(""+(sensibilite.getProgress()+1)));
-        intent.putExtra("difficulte",(""+(difficulte.getProgress()+1)));
-        startActivity(intent);
+        if (nom.getText().toString().length() != 0) {
+            Intent intent = new Intent(FirstActivity.this, dessin.class);
+            intent.putExtra("player_name", nom.getText().toString());
+            intent.putExtra("sensibilite", ("" + (sensibilite.getProgress() + 1)));
+            intent.putExtra("difficulte", ("" + (difficulte.getProgress() + 1)));
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Veuillez entrer un Pseudo SVP!", Toast.LENGTH_LONG).show();
+        }
     }
 
 
